@@ -1,22 +1,67 @@
-# nixos/configuration.nix — Main system config (just imports)
-{ config, pkgs, lib, ... }:
+{ self, inputs, ... }: {
 
-{
-  imports = [
-    ./hardware.nix
-    ./modules/nix.nix
-    ./modules/boot.nix
-    ./modules/networking.nix
-    ./modules/locale.nix
-    ./modules/desktop.nix
-    ./modules/graphics.nix
-    ./modules/audio.nix
-    ./modules/bluetooth.nix
-    ./modules/users.nix
-    ./modules/fonts.nix
-    ./packages.nix
-  ];
+  flake.nixosModules.duatConfiguration = { pkgs, lib, ... }: {
+    imports = [
+      self.nixosModules.duatHardware
+      self.nixosModules.niri
+      self.nixosModules.gdm
+      self.nixosModules.bluetooth
+      self.nixosModules.spotify
+      self.nixosModules.discord
+      self.nixosModules.udisks
+      self.nixosModules.files
+      self.nixosModules.surfshark
+      self.nixosModules.helix
+      self.nixosModules.gimp
+      self.nixosModules.hardwareOptimization
+      # note: self.nixosModules.nvidia intentionally NOT imported here —
+      # duat's nvidia config lives in duatHardware instead
+    ];
 
-  # State version - never change after install
-  system.stateVersion = "25.11";
+    nixpkgs.config.allowUnfree = true;
+
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
+    networking.hostName = "duat";
+
+    networking.networkmanager.enable = true;
+
+    time.timeZone = "Asia/Tel_Aviv";
+
+    users.users.claudio = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "disk" "networkmanager" ];
+      packages = with pkgs; [
+        tree
+      ];
+    };
+
+    services.xserver.xkb = {
+      layout = "us,il";
+      options = "grp:win_space_toggle";
+    };
+
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    nix.settings = {
+      download-buffer-size = 524288000;
+    };
+
+    environment.systemPackages = with pkgs; [
+      firefox
+      wget
+      curl
+      git
+      vim
+      alacritty
+      btop
+      bat
+    ];
+
+    system.stateVersion = "25.11";
+  };
+
 }
