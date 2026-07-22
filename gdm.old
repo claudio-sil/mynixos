@@ -1,0 +1,8 @@
+{ self, inputs, ... }: {
+  flake.nixosModules.gdm = { ... }: {
+    services.xserver.enable = true;
+    services.displayManager.gdm.enable = true;
+    #services.displayManager.gdm.wayland = true;
+    # wayland is now default in GNOME 50, option was removed
+  };
+}
