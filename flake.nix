@@ -1,6 +1,9 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Add a specific pointer for your bleeding-edge packages
+    nixpkgs-blender.url = "github:nixos/nixpkgs/nixos-unstable";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
@@ -16,6 +19,16 @@
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = [
+            (final: prev: {
+              # Pull blender explicitly from your second input if needed, 
+              # or use an overlay to map it cleanly.
+              blender = (import inputs.nixpkgs-blender {
+                inherit system;
+                config.allowUnfree = true;
+              }).blender;
+            })
+          ];
         };
       };
     };
