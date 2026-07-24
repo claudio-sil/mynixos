@@ -5,13 +5,15 @@
     # (CUDAToolkit_ROOT gets malformed). See NixOS/nixpkgs#303489 - unresolved
     # across multiple nixpkgs/OIDN versions.
     #
-    # blender-bin sidesteps this entirely: it just downloads Blender's official
-    # prebuilt binary from blender.org, which already ships working CUDA
-    # support compiled upstream. No local build, no OIDN CUDA bug.
+    # blender-bin isn't part of nixpkgs itself - it's a separate flake
+    # (github:edolstra/nix-warez?dir=blender) that just fetches Blender's
+    # official prebuilt binary from blender.org, CUDA already working.
+    # Added as a flake input in flake.nix; referenced here via `inputs`,
+    # which is already in scope from this file's own `{ self, inputs, ... }`.
     nixpkgs.config.allowUnfree = true;
 
     environment.systemPackages = [
-      pkgs.blender-bin
+      inputs.blender-bin.packages.${pkgs.system}.default
     ];
   };
 }
