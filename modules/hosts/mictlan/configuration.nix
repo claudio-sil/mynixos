@@ -7,7 +7,7 @@
       self.nixosModules.nvidia
       self.nixosModules.gdm
       self.nixosModules.bluetooth
-      self.nixosModules.blender
+      self.nixosModules.blenderCuda
       self.nixosModules.davinci-resolve
       self.nixosModules.spotify
       self.nixosModules.discord
