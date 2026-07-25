@@ -59,6 +59,7 @@
           "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+B".spawn-sh = lib.getExe pkgs.firefox;
           "Mod+D".spawn-sh = "discord";
+          "Mod+Shift+B".focus-workspace = "blender";
 
           #Navigation binds
           "Mod+H".focus-column-left = _: {};
@@ -100,7 +101,7 @@
             default-column-width = { proportion = 0.5; };
           }
           {
-            matches = [ { app-id = "blender"; } ];
+            matches = [ { app-id = "Blender"; } ];
             open-on-workspace = "blender";
             open-fullscreen = true;
           }  
