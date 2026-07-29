@@ -1,13 +1,11 @@
 { self, inputs, ... }: {
   flake.nixosModules.llm = { pkgs, config, lib, ... }: {
 
-    # Enable Ollama with NVIDIA CUDA support
     services.ollama = {
       enable = true;
-      package = pkgs.ollama-cuda; # <--- Changed here
+      package = pkgs.ollama.override { acceleration = "cuda"; };
     };
 
-    # ChatGPT-style web UI running locally
     services.open-webui = {
       enable = true;
       port = 11111;
@@ -16,7 +14,6 @@
       };
     };
 
-    # Terminal CLI tools
     environment.systemPackages = with pkgs; [
       aichat
       oterm
