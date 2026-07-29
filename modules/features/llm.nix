@@ -3,7 +3,7 @@
 
     services.ollama = {
       enable = true;
-      package = pkgs.ollama.override { acceleration = "cuda"; };
+      package = pkgs.ollama-vulkan; # <--- Uses pre-built Vulkan output
     };
 
     services.open-webui = {
