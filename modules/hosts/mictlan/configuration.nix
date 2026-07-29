@@ -5,6 +5,7 @@
       self.nixosModules.myMachineHardware
       self.nixosModules.niri
       self.nixosModules.nvidia
+      self.nixosModules.llm
       self.nixosModules.gdm
       self.nixosModules.bluetooth
       self.nixosModules.blender
