@@ -56,9 +56,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nix.settings = {
-#    substituters = [ "https://cache.nixos-cuda.org" ];
+    substituters = [ "https://cache.nixos-cuda.org" ];
     download-buffer-size = 524288000;
-#    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
   };
 
   environment.systemPackages = with pkgs; [
