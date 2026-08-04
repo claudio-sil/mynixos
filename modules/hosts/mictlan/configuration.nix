@@ -43,7 +43,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.claudio = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "disk" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "disk" "networkmanager" "kvm" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
