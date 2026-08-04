@@ -21,6 +21,7 @@
     ];
 
 
+  boot.loader.systemd-boot.memtest86.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
