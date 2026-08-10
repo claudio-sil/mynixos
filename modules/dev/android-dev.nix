@@ -6,8 +6,8 @@
 
     let
       androidComposition = pkgs.androidenv.composeAndroidPackages {
-        platformVersions = [ "35" ];
-        buildToolsVersions = [ "35.0.0" ];
+        platformVersions = [ "35" "36" ];
+        buildToolsVersions = [ "35.0.0" "36.0.0" ];
 
         includeEmulator = false;
         includeSystemImages = false;
@@ -34,7 +34,7 @@
 
         # Force Gradle to use the aapt2 supplied by the Nix Android SDK.
         GRADLE_OPTS =
-          "-Dorg.gradle.project.android.aapt2FromMavenOverride=${sdkRoot}/build-tools/35.0.0/aapt2";
+          "-Dorg.gradle.project.android.aapt2FromMavenOverride=${sdkRoot}/build-tools/36.0.0/aapt2";
 
         shellHook = ''
           echo

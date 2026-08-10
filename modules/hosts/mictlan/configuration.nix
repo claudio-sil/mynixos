@@ -71,6 +71,14 @@
     alacritty
     btop
     bat
+    # Hardware diagnostics
+    usbutils
+    pciutils
+    libinput
+
+    # Network diagnostics
+    ethtool
+    iperf3
     ];
   
 
