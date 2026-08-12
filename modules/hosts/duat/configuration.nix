@@ -66,6 +66,8 @@
       pciutils
       usbutils
       lshw
+      dmidecode
+      smartmontools
       nvme-cli
       lm_sensors
 
