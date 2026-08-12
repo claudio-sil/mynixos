@@ -67,7 +67,7 @@
       usbutils
       lshw
       nvme-cli
-      lm_senseors
+      lm_sensors
 
       #network diagnosis
       ethtool
