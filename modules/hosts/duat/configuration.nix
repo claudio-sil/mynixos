@@ -51,6 +51,8 @@
     };
 
     environment.systemPackages = with pkgs; [
+      eza
+      openssh
       firefox
       wget
       curl
@@ -59,6 +61,19 @@
       alacritty
       btop
       bat
+
+      #Hardware diagnosis
+      pciutils
+      usbutils
+      lshw
+      nvme-cli
+      lm-senseors
+
+      #network diagnosis
+      ethtool
+      iperf3
+      dnsutils
+      traceroute
     ];
 
     system.stateVersion = "25.11";
