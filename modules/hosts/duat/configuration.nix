@@ -50,6 +50,11 @@
       download-buffer-size = 524288000;
     };
 
+    services.openssh = {
+      enable = true;
+      openFirewall = true;
+    };
+
     environment.systemPackages = with pkgs; [
       eza
       openssh
