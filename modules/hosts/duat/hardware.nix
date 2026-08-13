@@ -5,11 +5,7 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    # _ Achitechture  _____________________________________________________
-
-    nixpkgs.hostPlatform = "x86_64-linux";
-
-    # ── Boot ──────────────────────────────────────────────────────────────
+    # ── Boot & Drivers ───────────────────────────────────────────────────
     boot.initrd.availableKernelModules = [
       "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"
     ];
@@ -17,7 +13,30 @@
     boot.kernelModules        = [ "kvm-intel" ];
     boot.extraModulePackages  = [];
 
-    # ── Filesystem — EDIT THESE to match `lsblk -f` / `blkid` on duat ─────
+    # ── Wireless & Power Tweaks (ath9k Fixes) ────────────────────────────
+    # 1. Disable ath9k hardware power-saving & force software crypto (fixes packet loss)
+    boot.extraModprobeConfig = ''
+      options ath9k ps_enable=0 nohwcrypt=1
+    '';
+
+    # 2. Disable PCIe link power management (ASPM) to prevent slot drops
+    boot.kernelParams = [ "pcie_aspm=off" ];
+
+    # 3. Disable NetworkManager power saving globally
+    networking.networkmanager.wifi.powersave = false;
+
+    # 4. Reload ath9k module automatically when waking from suspend
+    systemd.services.reload-ath9k-on-resume = {
+      description = "Reload ath9k driver after system resume";
+      wantedBy = [ "post-resume.target" ];
+      after = [ "post-resume.target" ];
+      script = ''
+        /run/current-system/sw/bin/modprobe -r ath9k || true
+        /run/current-system/sw/bin/modprobe ath9k
+      '';
+    };
+
+    # ── Filesystem ───────────────────────────────────────────────────────
     fileSystems."/" = {
       device = "/dev/disk/by-label/NIXOS";
       fsType = "ext4";
@@ -35,9 +54,7 @@
     hardware.cpu.intel.updateMicrocode =
       lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-    # ── NVIDIA GeForce 920M — legacy (Maxwell) ────────────────────────────
-    # Kept local to duat rather than using self.nixosModules.nvidia, since
-    # that shared module targets a different driver/setup (no PRIME offload).
+    # ── NVIDIA GeForce 920M ───────────────────────────────────────────────
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
       modesetting.enable = true;
@@ -50,7 +67,6 @@
           enable           = true;
           enableOffloadCmd = true;
         };
-        # ⚠ Set these to duat's actual PCI bus IDs (lspci | grep -E 'VGA|3D')
         intelBusId  = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
