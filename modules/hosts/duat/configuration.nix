@@ -18,7 +18,10 @@
       # duat's nvidia config lives in duatHardware instead
     ];
 
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = {
+      allowUnfree = true;
+      nvidia.acceptLicense = true;
+    };
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;

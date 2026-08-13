@@ -38,6 +38,7 @@
     # ── NVIDIA GeForce 920M — legacy (Maxwell) ────────────────────────────
     # Kept local to duat rather than using self.nixosModules.nvidia, since
     # that shared module targets a different driver/setup (no PRIME offload).
+    services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
       modesetting.enable = true;
       open               = false;
