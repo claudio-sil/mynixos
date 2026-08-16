@@ -3,7 +3,7 @@
   flake.nixosModules.duatConfiguration = { pkgs, lib, ... }: {
     imports = [
       self.nixosModules.duatHardware
-      self.nixosModules.niri
+      self.nixosModules.niriDuat
       self.nixosModules.gdm
       self.nixosModules.bluetooth
       self.nixosModules.spotify

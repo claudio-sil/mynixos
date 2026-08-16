@@ -1,10 +1,17 @@
-{ self, inputs, ... }: { 
+{ self, inputs, ... }: {
   perSystem = { pkgs, ... }: {
-    packages.myNoctalia = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
+    packages.myNoctaliaMictlan = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
       inherit pkgs;
-      settings = 
+      settings =
         (builtins.fromJSON
-          (builtins.readFile ./noctalia.json)).settings;
+          (builtins.readFile ./noctalia-mictlan.json)).settings;
+    };
+
+    packages.myNoctaliaDuat = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
+      inherit pkgs;
+      settings =
+        (builtins.fromJSON
+          (builtins.readFile ./noctalia-duat.json)).settings;
     };
   };
 }
