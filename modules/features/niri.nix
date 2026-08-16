@@ -141,15 +141,14 @@
         };
       };
 
-      # duat: single built-in laptop panel, no fixed output/workspace
-      # pinning needed — adjust the output name below to match what
-      # `niri msg outputs` reports on duat (commonly eDP-1).
+      # duat: single built-in laptop panel — no output pinning needed,
+      # niri creates numbered workspaces on that panel automatically.
+      # "blender" is kept since the shared window-rule above targets
+      # open-on-workspace = "blender".
       packages.myNiriDuat = mkNiri {
         noctaliaPkg = self'.packages.myNoctaliaDuat;
         hostSettings = {
           workspaces = {
-            "1" = {};
-            "2" = {};
             "blender" = {};
           };
         };
