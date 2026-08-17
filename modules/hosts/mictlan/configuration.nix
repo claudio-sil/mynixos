@@ -62,6 +62,14 @@
     trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
   };
 
+  environment.shellAliases = {
+    bg-mocha = ''printf "\033]11;#1e1e2e\007"'';
+    bg-frappe = ''printf "\033]11;#303446\007"'';
+    bg-macchiato = ''printf "\033]11;#24273a\007"'';
+    bg-latte = ''printf "\033]11;#eff1f5\007"'';
+    bg-nord = ''printf "\033]11;#2e3440\007"'';
+  };
+
   environment.systemPackages = with pkgs; [
     firefox
     wget
