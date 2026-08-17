@@ -3,6 +3,7 @@
   flake.nixosModules.myMachineConfiguration = { pkgs, lib, ... }: {
     imports = [
       self.nixosModules.myMachineHardware
+      self.nixosModules.secrets
       self.nixosModules.niriMictlan
       self.nixosModules.nvidia
       self.nixosModules.llm

@@ -4,6 +4,7 @@
     imports = [
       self.nixosModules.duatHardware
       self.nixosModules.niriDuat
+self.nixosModules.secrets
       self.nixosModules.gdm
       self.nixosModules.bluetooth
       self.nixosModules.spotify

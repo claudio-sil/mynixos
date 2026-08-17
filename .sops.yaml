@@ -1,0 +1,11 @@
+keys:
+  - &host_mictlan age1xakkrexvngc008r65kff9rqslxjd23kzyh9hevljpyq6fv8v9fuqwds9pj
+  - &host_duat age1vexnya5q9dqa965m9pcjc2tvfjpczgyuzf26w8sry7xg74p4ccdqd2jaal
+  - &user_claudio age1r7v2rrhwd2knfm68dhynw9xxfjdy54mdtqpcma0uc0myqewvypqq7ys7q2
+creation_rules:
+  - path_regex: secrets\.yaml$
+    key_groups:
+      - age:
+          - *host_mictlan
+          - *host_duat
+          - *user_claudio
