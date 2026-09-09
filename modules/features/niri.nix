@@ -124,13 +124,13 @@
         noctaliaPkg = self'.packages.myNoctaliaMictlan;
         hostSettings = {
           outputs."DP-1" = {
-            mode = "1920x1080@60.000";
+            mode = "3440x1440@165.001";
             position = _: { props = { x = 0; y = 0; }; };
             scale = 1.0;
           };
           outputs."HDMI-A-1" = {
             mode = "1920x1080@60.000";
-            position = _: { props = { x = 1920; y = 0; }; };
+            position = _: { props = { x = 3440; y = 0; }; };
             scale = 1.0;
           };
           workspaces = {
